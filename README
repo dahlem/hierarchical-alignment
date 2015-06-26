@@ -1,0 +1,68 @@
+README
+
+This project implements pair-wise (local and global) alignments for
+sequences that consist of alphabets that are organised in a
+hierarchical classification scheme. The hierarchical classification of
+the alphabet affords us the ability to query a path distance between
+any two symobls in the alphabet, which incorporates more detail than
+traditional binary match/mismatch queries. This path distance
+inherently revolves around knowing the least common ancestor of the
+two symbols. In order to facilitate efficient lookups of the LCAs we
+computed all pair-wise LCAs offline using the lca application (also on
+github) [1].
+
+The inputs to the application have to satisfy the following format:
+
+1) *Euler Levels*: the euler levels are the result of computing the
+Euler circuit of the hierarchical classification system [2]. This is
+just a row vector with the levels in the classification tree.
+
+2) *Euler Positions*: the positions of the first occurrence of a
+symbol in the Euler circuit is also computed by the the application in
+[2]. This file gives the row vector of the indices into the euler
+circuit.
+
+3) *LCA*: the least common ancestor lookup table is computed using
+[1]. The file defines 3 columns separated by commas of the 2 symbols
+and the corresponding LCA.
+
+4) *Set 1/2*: A file of comma-separated sequences defined over the
+alphabet.
+
+The output is a file with the pair-wise normalised similarity score
+where the pair constitutes a comparison between any sequence of set 1
+with any sequence of set 2.
+
+
+CONFIGURATION
+
+The code is implemented in C++ using the boost libraries.
+
+OpenMP can be enabled using the --enable-openmp flag at the
+configuration step.
+
+
+EXECUTION
+
+General Configuration:
+  --help                produce help message
+  --version             show the version
+
+I/O Configuration:
+  --results arg (=./results) results directory.
+  --euler_levels arg         Filename of the vertex levels in the Euler 
+                             Circuit.
+  --euler_positions arg      Filename of the vertex positions in the Euler 
+                             Circuit.
+  --lca arg                  Filename with the LCAs computed offline.
+  --set_1 arg                Filename of the source set.
+  --set_2 arg                Filename of the target set.
+
+Algorithm Configuration:
+  --alg arg (=1)             Algorithm: 1 - local alignment, 2 - global alignment.
+  --scores arg (=0)          Compute just alignment scores, no backtracking.
+  --gap_penalty arg (=1.33)  Gap penalty for the alignments.
+
+
+[1] https://github.com/dahlem/lca
+[2] https://github.com/dahlem/Euler-Circuit

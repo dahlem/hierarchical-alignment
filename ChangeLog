@@ -1,0 +1,3 @@
+* [0.5] - 2015-05-05
+** Changed
+ - Implemented LCA using the euler circuit and level arrays
