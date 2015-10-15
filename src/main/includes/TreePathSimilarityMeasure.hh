@@ -43,7 +43,7 @@
 class TreePathSimilarityMeasure : public alignment::AbstractDistanceMeasure
 {
  public:
-  TreePathSimilarityMeasure(double p_delta, common::IntVec &p_levels, common::StringIntMap &p_pos,
+  TreePathSimilarityMeasure(double p_delta, common::DoubleVec &p_levels, common::StringIntMap &p_pos,
                             common::StrStrMap &p_lcas)
       : alignment::AbstractDistanceMeasure(p_delta), m_levels(p_levels), m_pos(p_pos), m_lcas(p_lcas) {}
 
@@ -60,9 +60,9 @@ class TreePathSimilarityMeasure : public alignment::AbstractDistanceMeasure
     if (m_lcas.find(key) == m_lcas.end()) { return -1.0; }
 
     common::Symbol lca = m_lcas[key];
-    boost::uint32_t levelLCA = m_levels[m_pos[lca]];
-    boost::uint32_t distLeftLCA = m_levels[m_pos[left]] - m_levels[m_pos[lca]];
-    boost::uint32_t distRightLCA = m_levels[m_pos[right]] - m_levels[m_pos[lca]];
+    double levelLCA = m_levels[m_pos[lca]];
+    double distLeftLCA = m_levels[m_pos[left]] - m_levels[m_pos[lca]];
+    double distRightLCA = m_levels[m_pos[right]] - m_levels[m_pos[lca]];
 
     return (1.0 + levelLCA)/(1.0 + levelLCA + distLeftLCA + distRightLCA);
   }
@@ -83,7 +83,7 @@ class TreePathSimilarityMeasure : public alignment::AbstractDistanceMeasure
   }
 
  private:
-  common::IntVec &m_levels;
+  common::DoubleVec &m_levels;
   common::StringIntMap &m_pos;
   common::StrStrMap &m_lcas;
 };

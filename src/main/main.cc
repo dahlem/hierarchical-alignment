@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
   std::cout << "Reading the Euler Levels..." << std::endl;
 #endif /* NDEBUG */
 
-  common::IntVec euler_levels;
+  common::DoubleVec euler_levels;
   std::string line;
   while (!eulerLevelsFile.eof()) {
     std::getline(eulerLevelsFile, line);
@@ -150,7 +150,7 @@ int main(int argc, char *argv[])
 
 #ifndef NDEBUG
   std::cout << std::endl << "Euler Levels:  ";
-  std::copy(euler_levels.begin(), euler_levels.end(), std::ostream_iterator<boost::uint32_t>(std::cout, "\t"));
+  std::copy(euler_levels.begin(), euler_levels.end(), std::ostream_iterator<double>(std::cout, "\t"));
   std::cout << std::endl;
   std::cout << std::endl << "Euler Positions:  ";
   std::copy(euler_positions.begin(), euler_positions.end(), std::ostream_iterator<common::StringIntMap::value_type>(std::cout, "\t"));
