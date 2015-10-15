@@ -9,3 +9,6 @@
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 include_HEADERS = includes
+
+check-syntax:
+	gcc -o nul -S ${lca_SOURCES}
